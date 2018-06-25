@@ -1,4 +1,6 @@
 keys/*
+windows-worker/*.pub
+windows-worker/worker_key
 bin/*
 !bin/.gitkeep
 .DS_Store
