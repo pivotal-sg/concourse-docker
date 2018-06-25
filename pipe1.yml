@@ -1,0 +1,42 @@
+resources:
+- name: code
+  type: git
+  source:
+    uri: git://host.docker.internal/
+    branch: master
+# - name: publish
+#   type: git
+#   source:
+#     uri: git://host.docker.internal:9419/
+#     branch: master
+
+jobs:
+- name: elmo-build
+
+  plan:
+  - get: code
+    trigger: true
+
+  - task: build-and-test
+    config:
+      platform: windows
+      run:
+        path: powershell
+        args:
+        # - -Command
+        # - |
+        #   pwd
+        #   sleep 3600
+        - ./build.ps1
+        - -mode release -targetFramework 4.5
+        dir: code
+      inputs:
+      - name: code
+      # outputs:
+      # - name: anoutput
+      #   path: output
+
+  # - put: publish
+  #   params:
+  #     repository: anoutput
+
