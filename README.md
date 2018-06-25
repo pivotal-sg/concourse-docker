@@ -1,3 +1,14 @@
+# Concourse Docker for Windows
+
+To get started,
+
+```sh
+./generate-keys
+docker-compose up
+```
+
+On your Windows machine, run `./windows-worker/start-worker.bat`. Update `--tsa-host` accordingly.
+
 # Concourse Docker
 
 This Docker image simply packages up the official `concourse` binary and
