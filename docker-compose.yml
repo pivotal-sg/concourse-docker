@@ -11,10 +11,16 @@ services:
 
   concourse-web:
     image: concourse/concourse
-    command: web
+    command: >
+      web
+      --basic-auth-username myuser
+      --basic-auth-password mypass
+      --session-signing-key /concourse-keys/session_signing_key
+      --tsa-host-key /concourse-keys/tsa_host_key
+      --tsa-authorized-keys /concourse-keys/authorized_worker_keys
     links: [concourse-db]
     depends_on: [concourse-db]
-    ports: ["8080:8080"]
+    ports: ["8080:8080", "2222:2222"]
     volumes: ["./keys/web:/concourse-keys"]
     environment:
     - CONCOURSE_POSTGRES_HOST=concourse-db
